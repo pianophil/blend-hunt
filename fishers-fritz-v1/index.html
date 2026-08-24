@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#081722"><title>TIDEBOUND — Fischer's Fritz v1</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<canvas id="game"></canvas>
+<div id="hud" class="hud hidden"><div class="hudTop"><div class="panel brand"><b>TIDEBOUND</b><span>FISCHER'S FRITZ v1</span><small id="area">FRITZ HARBOR</small></div><div class="panel stats"><span>₡ <b id="money">0</b></span><span>LV <b id="level">1</b></span><span>XP <b id="xp">0</b></span><span>PACK <b id="bag">0</b>/<b id="bagCap">10</b></span><span id="fuelStat" class="hidden">FUEL <b id="fuel">0</b>/<b id="fuelMax">0</b></span></div></div><div class="panel quest" id="quest">Talk to Fritz.</div></div>
+<div id="minimap" class="minimap hidden"><canvas id="mini" width="150" height="100"></canvas><div id="weather">☀ 08:00</div></div>
+<div id="joystick" class="joystick hidden"><div class="joystickRing"></div><div id="joystickKnob" class="joystickKnob"></div></div>
+<div id="worldButtons" class="worldButtons hidden"><button id="packBtn" class="btn blue">PACK</button><button id="actionBtn" class="btn red">ACTION</button></div>
+<div id="toast" class="toast"></div>
+<div id="dialogue" class="dialogue hidden"><div id="dialoguePortrait" class="portrait"></div><div><b id="dialogueName">FRITZ</b><p id="dialogueText"></p><div id="dialogueChoices" class="dialogueChoices"></div></div></div>
+<div id="fishingUI" class="overlayCard hidden"><div class="overlayTitle" id="fishName">FISHING</div><div class="overlayMsg" id="fishMessage">Waiting for a bite...</div><label>TENSION</label><div class="meter"><div id="tensionFill"></div></div><label>DISTANCE</label><div class="meter"><div id="distanceFill"></div></div><div class="hint">Hold ACTION to reel · release to relax the line</div></div>
+<div id="battle" class="battle hidden"><div class="battleBackdrop"></div><div class="battleTop"><div class="battlePanel"><strong id="playerBattleName">PLAYER</strong><div>HP <span id="playerHp">100</span>/<span id="playerHpMax">100</span></div><div class="hpbar"><div id="playerHpFill"></div></div><div>Focus <span id="focus">0</span></div></div><div class="battlePanel enemyPanel"><strong id="enemyName">CREATURE</strong><div>HP <span id="enemyHp">0</span>/<span id="enemyHpMax">0</span></div><div class="hpbar"><div id="enemyHpFill"></div></div></div></div><canvas id="playerPortrait" width="160" height="160"></canvas><canvas id="enemyPortrait" width="160" height="160"></canvas><div id="battleMessage">Your turn.</div><div id="timingBar" class="timing hidden"><div class="timingTrack"><div class="timingGood"><div class="timingPerfect"></div></div><div id="timingNeedle"></div></div></div><div id="moves" class="moves"></div><button id="timingButton" class="timingButton">A<br><small>TIMING</small></button></div>
+<div id="modalWrap" class="modalWrap hidden"><div id="modal" class="modal"></div></div>
+<div id="startScreen" class="startScreen"><div class="startCard"><div class="logo">TIDEBOUND</div><div class="edition">FISCHER'S FRITZ v1</div><p class="subtitle">Fish. Explore. Fight. Rebuild the harbor. Sail farther. Descend beneath the sea.</p><label for="playerName">Your name</label><input id="playerName" maxlength="14" value="Kai" autocomplete="off"><button id="startBtn" class="primary">BEGIN NEW GAME</button><button id="continueBtn" class="secondary hidden">CONTINUE SAVE</button><small>Mobile browser build · portrait/landscape</small></div></div>
+<script src="game-1.js"></script>
+<script src="game-2.js"></script>
+<script src="game-3.js"></script>
+<script src="game-4.js"></script>
+<script src="game-5.js"></script>
+<script src="game-6.js"></script>
+<script src="game-7.js"></script></body></html>
