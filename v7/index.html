@@ -5,48 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#071923">
 <title>TIDEBOUND V7</title>
-<style>
-*{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#071923;color:#fff;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;touch-action:none}
-canvas{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated;background:#09222d}
-button{font-family:inherit;touch-action:manipulation}
-#boot{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(180deg,#123845,#07141d 70%)}
-.card{width:min(92vw,540px);border:4px solid #efe9cf;background:#102b34;padding:22px;box-shadow:10px 10px #02070a}
-.logo{font-size:52px;line-height:.86;letter-spacing:-4px;color:#f4d26c;text-shadow:4px 4px #7d352d;margin-bottom:18px}
-.tag{font-size:11px;line-height:1.55;color:#dce5df}
-#begin{width:100%;height:66px;margin-top:16px;border:3px solid #fff1d5;background:linear-gradient(#d36249,#9e3b31);color:#fff;font-weight:900;font-size:16px;box-shadow:4px 4px #02070a}
-.hud{position:fixed;inset:0;pointer-events:none}.top{display:flex;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 8px) 9px}
-.panel{background:#071823e8;border:2px solid #e4ead9;box-shadow:3px 3px #0008;padding:7px 9px;font-size:11px;font-weight:900}
-.quest{position:absolute;left:9px;top:calc(env(safe-area-inset-top) + 62px);max-width:79%;font-size:10px}
-#joy{position:fixed;left:14px;bottom:calc(env(safe-area-inset-bottom) + 14px);width:140px;height:140px;border-radius:50%;background:#07131ebd;border:3px solid #e7efdf99;box-shadow:inset 0 0 0 13px #ffffff05,4px 5px #0008}
-#ring{position:absolute;inset:28px;border:2px dashed #ffffff2c;border-radius:50%}
-#knob{position:absolute;left:44px;top:44px;width:52px;height:52px;border-radius:50%;background:linear-gradient(#89a9ad,#405e68);border:3px solid #eef3e6;box-shadow:3px 4px #061015}
-#worldButtons{position:fixed;right:10px;bottom:calc(env(safe-area-inset-bottom) + 14px);display:grid;grid-template-columns:68px 68px;gap:8px}
-#worldButtons button,.move,#battleA,.modal button{border:2px solid #edf1df;color:#fff;box-shadow:3px 3px #071018;font-weight:900;min-height:60px;background:#223d46}
-#act{background:#b94f3f!important}#inv{background:#4a7199!important}
-.toast{position:fixed;left:50%;bottom:184px;transform:translateX(-50%);background:#061017f2;border:2px solid #e7efdd;padding:8px 11px;font-size:11px;opacity:0;z-index:100;white-space:nowrap}
-#fishOverlay{position:fixed;left:16px;right:16px;top:33%;height:190px;background:#071722f2;border:3px solid #ebe9d7;display:none;z-index:30;padding:12px;box-shadow:6px 6px #0008}
-.meter{height:14px;background:#243740;border:1px solid #dfe8df;margin:4px 0 12px}.meter>div{height:100%}
-#battle{position:fixed;inset:0;z-index:45;display:none;background:linear-gradient(180deg,#092b38,#07131d 68%,#050b10)}
-.battleSky{position:absolute;inset:0 0 38% 0;background:repeating-linear-gradient(0deg,#103a47 0 18px,#0f3440 18px 36px)}
-.battleFloor{position:absolute;left:0;right:0;bottom:0;height:46%;background:repeating-linear-gradient(90deg,#18363b 0 26px,#173137 26px 52px)}
-.btop{position:absolute;left:10px;right:10px;top:calc(env(safe-area-inset-top) + 8px);display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.hp{background:#071621ef;border:3px solid #efe7cb;padding:8px;box-shadow:4px 4px #0008;font-size:11px}
-.bar{height:10px;background:#24333a;border:1px solid #d7e3d7;margin-top:4px}.fill{height:100%;background:#73bd6b}.enemy .fill{background:#d26757}
-.portraits{position:absolute;left:0;right:0;top:17%;height:43%}.portrait{position:absolute;width:47%;height:100%;display:flex;align-items:center;justify-content:center}.you{left:0}.foe{right:0}
-.portrait canvas{position:static;width:min(43vw,185px);height:min(43vw,185px);filter:drop-shadow(9px 11px 0 #0008)}
-#msg{position:absolute;left:50%;top:59%;transform:translateX(-50%);width:90%;text-align:center;font-weight:900;color:#ffe075;text-shadow:2px 2px #000}
-#moves{position:absolute;left:10px;right:90px;bottom:calc(env(safe-area-inset-bottom) + 12px);display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.move{min-height:61px;background:linear-gradient(#2b535c,#17343b);font-size:9px}.move strong{display:block;color:#f5d675;font-size:11px}
-#battleA{position:absolute;right:12px;bottom:calc(env(safe-area-inset-bottom) + 12px);width:70px;height:130px;background:linear-gradient(#d56950,#9e3d31);font-size:30px;border-radius:16px}
-#battleA.pulse{animation:pulse .6s infinite alternate}@keyframes pulse{to{filter:brightness(1.4);transform:scale(1.05)}}
-#timing{position:absolute;left:7%;right:7%;bottom:calc(env(safe-area-inset-bottom) + 164px);height:50px;background:#07131ef3;border:3px solid #e9eddf;display:none}
-.track{position:absolute;left:8px;right:8px;top:20px;height:12px;background:#243942}.good{position:absolute;left:34%;width:32%;height:100%;background:#c8b95c}.perfect{position:absolute;left:46%;width:8%;height:100%;background:#75d174}.needle{position:absolute;top:-8px;width:5px;height:29px;background:#fff}
-.label{position:absolute;left:0;right:0;top:-17px;text-align:center;font-size:10px;font-weight:900}
-#mw{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;padding:14px;z-index:80}
-.modal{width:min(94vw,590px);max-height:84vh;overflow:auto;background:#132b32;border:4px solid #e8eddc;box-shadow:7px 7px #000;padding:13px}.modal h2{margin:0 0 8px;color:#f4d56b}.grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.item{border:1px solid #8ca09a;background:#1a3940;padding:8px;font-size:10px}.item b{display:block;color:#f4d56b}.item small{opacity:.8}.item button{width:100%;min-height:38px;margin-top:6px}.close{width:100%;margin-top:10px;background:#743e3e!important}
-</style>
+<link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
 <canvas id="g"></canvas>
@@ -60,158 +19,10 @@ button{font-family:inherit;touch-action:manipulation}
 
 <div id="mw"><div class="modal" id="modal"></div></div>
 <div id="boot"><div class="card"><div class="logo">TIDEBOUND<br>V7</div><div class="tag">PORT MERIDIAN ART BUILD<br><br>Tile-based coastline. No rounded island. Hard land/water boundary. Layered harbor, animated character sprites, interactive fishing and timing-based battles.</div><button id="begin">BEGIN</button></div></div>
-
-<script>
-(()=>{"use strict";
-const E=id=>document.getElementById(id),C=E("g"),X=C.getContext("2d"),TS=32,MW=42,MH=34;
-let W=0,H=0,D=1,last=0,cam={x:0,y:0},face={x:0,y:1},started=false;
-const P={x:19.5,y:18.5,money:0,bag:[],cap:8,caught:0,hp:100,focus:0,gadgets:[]};
-const J={on:false,id:null,x:0,y:0};let fishing={phase:"idle"},battle=null,timing=null;
-const FISH=[
-{name:"Harbor Sardine",value:8,type:"fish",hp:34},{name:"Silver Herring",value:11,type:"fish",hp:38},{name:"Rock Goby",value:14,type:"fish",hp:42},
-{name:"Blue Mackerel",value:18,type:"fish",hp:48},{name:"Green Crab",value:20,type:"crab",hp:52},{name:"Sand Shrimp",value:22,type:"crab",hp:45},{name:"Red Snapper",value:32,type:"fish",hp:60},{name:"Sea Bass",value:38,type:"fish",hp:68},{name:"Moon Jelly",value:42,type:"jelly",hp:58}];
-const GADGETS=[
-{name:"Driftwood Club",price:35,power:15,desc:"Wide timing window."},{name:"Hook Gloves",price:55,power:12,desc:"Fast close strike."},{name:"Weighted Net",price:75,power:5,desc:"Control move."},
-{name:"Salt Flare",price:90,power:8,desc:"Burning utility."},{name:"Shock Tag",price:120,power:11,desc:"Perfect can stun."},{name:"Shell Guard",price:140,power:0,desc:"Improves parry."},{name:"Rope Dart",price:180,power:24,desc:"Hard timing, high crit."},{name:"Chum Bomb",price:220,power:0,desc:"Weakens creature."},{name:"Stun Baton",price:300,power:28,desc:"Heavy perfect hit."},
-{name:"Quick-Reel Module",price:360,power:0,desc:"Faster fishing drill."},{name:"Barbed Gauntlet",price:480,power:32,desc:"Brutal close strike."},{name:"Harpoon Sidearm",price:850,power:40,desc:"Ranged heavy attack."}];
-const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),rnd=(a,b)=>a+Math.random()*(b-a),hash=(a,b,m)=>Math.abs(((a*73856093)^(b*19349663))%m);
-
-// Land map: every land cell is explicit. No ellipses, no circles.
-const LAND=Array.from({length:MH},()=>Array(MW).fill(false));
-function fill(x1,y1,x2,y2){for(let y=y1;y<=y2;y++)for(let x=x1;x<=x2;x++)if(x>=0&&y>=0&&x<MW&&y<MH)LAND[y][x]=true}
-// stepped island blocks
-fill(7,4,33,5);fill(5,6,35,8);fill(4,9,36,12);fill(3,13,37,17);fill(4,18,36,21);fill(6,22,34,24);fill(9,25,31,27);fill(13,28,27,29);
-// harbor indentation / bay
-for(let y=20;y<=25;y++)for(let x=16;x<=24;x++)LAND[y][x]=false;
-// piers are walkable land structures
-for(let y=21;y<=27;y++){LAND[y][13]=true;LAND[y][14]=true;LAND[y][26]=true;LAND[y][27]=true}
-for(let x=13;x<=18;x++){LAND[27][x]=true}for(let x=22;x<=27;x++)LAND[27][x]=true;
-// cliffs / decorative islands remain water
-
-const BUILDINGS=[
-{x:8,y:7,w:6,h:4,name:"TACKLE & GOODS",roof:"#a84e3f",kind:"store"},
-{x:26,y:7,w:7,h:4,name:"SHIPT„	ä±L–FNÑJÛÜ›]ÛœÈŠKœÝ[K™\Ü^OH™ÜšYŽÑJš›ÞHŠKœÝ[K™\Ü^OH˜›ØÚÈŸB™[˜Ý[Ûˆ˜]ÔÜ˜Z]Ê
-^ÂˆYŠX˜]J\™]\›ŽÛ]OQJž\ŠK™Ù]ÛÛ^
-Œ™ŠKQJ™œŠK™Ù]ÛÛ^
-Œ™ŠK\\™›Ü›X[˜ÙK››ÝÊ
-KSX]œÚ[ŠÌÍŒ
-JŒKNÞK˜ÛX\”™XÝ
-LŽLŽ
-NÙ‹˜ÛX\”™XÝ
-LŽLŽ
-NÂˆK™š[Ý[OHˆÌÌMLXˆŽÞK™š[™XÝ
-L‹LL
-NÞK™š[Ý[OHˆÌNLÙXHŽÞK™š[™XÝ
-ŒÊØ‹‹JNÞK™š[Ý[OHˆÌ™ŽŽÞK™š[™XÝ
-ÌKÌŠØ‹KJNÞK™š[Ý[OHˆÙXXNŽÞK™š[™XÝ
-Í‹ŠØ‹MKJNÞK™š[Ý[OHˆÙY˜ÌŽMˆŽÞK™š[™XÝ
-‹ÌŠØ‹‹ÌJNÞK™š[Ý[OHˆÎYÎLÌˆŽÞK™š[™XÝ
-‹MÊØ‹ÌËMŠNÞK™š[Ý[OHˆÙY™™ŽÞK™š[™XÝ
-ŒJØ‹MËŠNÞK™š[Ý[OHˆÌŽLŒHŽÞK™š[™XÝ
-JØ‹‹ŠNÞK™š[™XÝ
-Ì‹JØ‹‹ŠNÂˆ]OSX]œÚ[ŠÌŽ
-JŒÎÂˆYŠ˜]K™š\Ú\OOOH˜Ü˜XˆŠ^Ù‹™š[Ý[OHˆÙÍÍŒˆŽÙ‹™š[™XÝ
-Ì
-ÛKKŒ‹Î
-NÙ‹™š[™XÝ
-L
-ÛKNKŒËM
-NÙ‹™š[™XÝ
-JÛKNKŒËM
-NÙ‹™š[Ý[OHˆÎMŽÙ‹™š[™XÝ
-JÛKËM‹MJNÙ‹™š[™XÝ
-LÊÛKËM‹MJNÙ‹™š[Ý[OHˆÌLLHŽÙ‹™š[™XÝ
-ÊÛKL‹KJNÙ‹™š[™XÝ
-ÌŠÛKL‹KJ_Bˆ[ÙHYŠ˜]K™š\Ú\OOOHš™[HŠ^Ù‹™š[Ý[OHˆÎXÎÙˆŽÙ‹˜™YÚ[”]
-
-NÙ‹›[Ý™UÊÌJÛKŒJNÙ‹œ]XY˜]XÐÝ\™UÊ
-ÛKŒKN
-ÛKŒJNÙ‹›[™UÊN
-ÛKÌÊNÙ‹›[™UÊÌJÛKÌÊNÙ‹™š[
-
-NÙ›ÜŠ]OLÚOŽÚJÊÊY‹™š[™XÝ
-ÍJÚJŒLJÛKÌ‹KÎKJILŠJŽ
-_Bˆ[Ù^Ù‹™š[Ý[OHˆÍXXÍÈŽÙ‹˜™YÚ[”]
-
-NÙ‹›[Ý™UÊM
-ÛKŠNÙ‹›[™UÊÍŠÛKÊNÙ‹›[™UÊLJÛKÊNÙ‹›[™UÊL
-ÛKŠNÙ‹›[™UÊLJÛKL
-NÙ‹›[™UÊÍŠÛKL
-NÙ‹˜ÛÜÙT]
-
-NÙ‹™š[
-
-NÙ‹™š[Ý[OHˆÌÍÍ˜MÎŽÙ‹˜™YÚ[”]
-
-NÙ‹›[Ý™UÊLÊÛKŠNÙ‹›[™UÊLŠÛKÌJNÙ‹›[™UÊLNJÛKLJNÙ‹›[™UÊLÊÛKÊNÙ‹™š[
-
-NÙ‹™š[Ý[OHˆØY™™LŽÙ‹™š[™XÝ
-JÛKÍ
-NÙ‹™š[Ý[OHˆÌLLHŽÙ‹™š[™XÝ
-Î
-ÛKŒKKJ_Bˆ
-˜]K™š\Ú›˜[YKÕ\\Ø\ÙJ
-KËLŒ‹ˆÙYÍØH‹
-BŸB™[˜Ý[ÛˆÙ[\Š
-^Âˆ]Ý[T˜˜YËœ™YXÙJ
-KŠOO˜JÙ‹˜[YK
-KH”ÒSTÈ8 %ÐUÒ•VQTÚ•Ù^IÜÈÙ™™\Žˆ‰ŠÝÝ[
-ÈØÜ]ÛˆÛ˜ÛXÚÏIÜÙ[[
-
-IÏ”ÑSSÐUÒØ]Û”Ý\\ˆÛÛX˜]ØYÙ]ÏÜ]ˆÛ\ÜÏIÙÜšY	ÏˆŽÂˆ›ÜŠÛÛœÝÈÙˆÐQÑUÊ^Û]ÝÛT™ØYÙ]Ëš[˜ÛY\ÊË›˜[YJNÚ
-ÏH]ˆÛ\ÜÏIÚ][IÏˆŠÙË›˜[YJÈØ‰ŠÙËœšXÙJÈœÛX[ˆŠÙË™\ØÊÈÜÛX[]ÛˆŠÊÝÛÈ™\ØX›YŽˆˆŠJÈˆÛ˜ÛXÚÏIØ^QØYÙ]
-ŠÒ”ÓÓ‹œÝš[™ÚYžJË›˜[YJJÈŠIÏˆŠÊÝÛÈ“ÕÓ‘QŽˆ•VHŠJÈØ]ÛÙ]ˆŸZ
-ÏHÙ]ˆŽÛ[Ù[
-
-BŸBÚ[™ÝËœÙ[[Y[˜Ý[ÛŠ
-^Û]Ý[T˜˜YËœ™YXÙJ
-KŠOO˜JÙ‹˜[YK
-NÔ›[Û™^JÏ]Ý[Ô˜˜YÏV×NØÛÜÙS[Ù[
-
-NÚY
-
-NÝØ\Ý
-”ÛÛØ]Ú›Üˆ	ŠÝÝ[
-_BÚ[™ÝË˜^QØYÙ]Y[˜Ý[ÛŠ˜[YJ^Û]ÏQÐQÑUË™š[™
-Ož›˜[YOOO[˜[YJNÚYŠ›[Û™^OËœšXÙJ\™]\›ˆØ\Ý
-“›Ý[›ÝYÚ[Û™^KˆŠNÔ›[Û™^KOYËœšXÙNÔ™ØYÙ]Ëœ\Ú
-˜[YJNØÛÜÙS[Ù[
-
-NÚY
-
-NÝØ\Ý
-•[›ØÚÙYŠÛ˜[YJ_B™[˜Ý[Ûˆ[™[ÜžJ
-^Û]OJ™ØYÙ]Ë›[™ÝÔ™ØYÙ]Î–È‘š\ÝÈ—JK›X\
-Oˆ]ˆÛ\ÜÏIÚ][IÏˆŠÛŠÈØÙ]ˆŠKš›Ú[ŠˆŠKT˜˜YË›X\
-Oˆ]ˆÛ\ÜÏIÚ][IÏˆŠÙ‹›˜[YJÈØ‰ŠÙ‹˜[YJÈÙ]ˆŠKš›Ú[ŠˆŠNÛ[Ù[
-”PÒÏÚÛÛX˜]ÙX\Ü]ˆÛ\ÜÏIÙÜšY	ÏˆŠØJÈÙ]”ÙXÝ\™YØ]ÚÜ]ˆÛ\ÜÏIÙÜšY	ÏˆŠÊŸ]ˆÛ\ÜÏIÚ][IÏ‘[\OÙ]ˆŠJÈÙ]ˆŠ_B™[˜Ý[Ûˆ[Ù[
-
-^ÑJ›[Ù[ŠKš[›™\’SZ
-È]ÛˆÛ\ÜÏIØÛÜÙIÈÛ˜ÛXÚÏIØÛÜÙS[Ù[
-
-IÏÓÔÑOØ]ÛˆŽÑJ›]ÈŠKœÝ[K™\Ü^OH™›^Ÿ]Ú[™ÝË˜ÛÜÙS[Ù[Y[˜Ý[ÛŠ
-^ÑJ›]ÈŠKœÝ[K™\Ü^OH››Û™HŸB™[˜Ý[ÛˆXÝ[ÛŠ
-^ÂˆYŠš\Ú[™Ëœ\ÙOOOH˜š]HŠ\™]\›ˆÛÚÊ
-NÚYŠš\Ú[™Ëœ\ÙOOOH™šYÚŠ\™]\›ŽÂˆYŠX]š\Ý
-žLŒžKLMÊOKŽ
-\™]\›ˆÙ[\Š
-NÂˆYŠØ]\ZXY
-
-J\™]\›ˆÝ\š\Ú[™Ê
-NÂˆØ\Ý
-‘˜XÙHÚ[\ÈÜˆÝ[™]HØ]\ˆYÙKˆŠBŸB™[˜Ý[Ûˆ\]J
-^ÂˆYŠ˜]_š\Ú[™Ëœ\ÙHOOHšYHŸR‹›ÛŠ\™]\›ŽÛ]žTž
-Ò‹ž
-ŒËŒJ™žOTžJÒ‹žJŒËŒJ™ÂˆYŠX›ØÚÙY
-žžJJTž[žÚYŠX›ØÚÙY
-žžJJTžO[žNÂˆYŠX]˜XœÊ‹ž
-O“X]˜XœÊ‹žJI‰“X]˜XœÊ‹ž
-O‹ŒMJY˜XÙO^Þ“X]œÚYÛŠ‹ž
-KNŒNÙ[ÙHYŠX]˜XœÊ‹žJO‹ŒMJY˜XÙO^ÞŒN“X]œÚYÛŠ‹žJ_BŸB™[˜Ý[ÛˆÛÜ
-
-^Û]SX]›Z[ŠŒÍK
-[\Ý
-KÌL
-NÛ\Ý]Ý\]J
-NÝ\]Qš\Ú[™Ê
-NÚYŠ[Z[™Ê^Ý[Z[™ËœÜÊÏ][Z[™Ë™\Š—F–Ö–ærç7VVB¦GC¶–b‡F–Ö–ærç÷3ãÓ—·F–Ö–ærç÷3Ó·F–Ö–æræF—#ÒÓÖVÇ6R–b‡F–Ö–ærç÷3ÃÓ—·F–Ö–ærç÷3Ó·F–Ö–æræF—#ÓÔR‚&æVVFÆR"’ç7G–ÆRæÆVgCÒ‡F–Ö–ærç÷2£’²"R'Õ‚æ6ÆV%&V7BƒÃÅrÄ‚“·&VæFW%v÷&ÆB‡B“¶G&u÷'G&—G2‚“·&WVW7Dæ–ÖF–öäg&ÖR†Æö÷—Ð¦6öç7B¦÷“ÔR‚&¦÷’"’Æ¶æö#ÔR‚&¶æö""“°¦¦÷’æFDWfVçDÆ—7FVæW"‚'ö–çFW&F÷vâ"ÆSÓç¶Rç&WfVçDFVfVÇB‚“´¢æöã×G'VS´¢æ–CÖRçö–çFW$–C¶¦÷’ç6WEö–çFW$6GW&Sòâ†Rçö–çFW$–B—Ò“°¦¦÷’æFDWfVçDÆ—7FVæW"‚'ö–çFW&Ö÷fR"ÆSÓç¶–b‚¢æöçÇÆRçö–çFW$–BÓÔ¢æ–B—&WGW&ã¶ÆWB#Ö¦÷’ævWD&÷VæF–æt6Æ–VçE&V7B‚’Æ7ƒ×"æÆVgB·"çv–GF‚ó"Æ7“×"çF÷·"æ†V–v‡Bó"ÆGƒÖRæ6Æ–VçE‚Ö7‚ÆG“ÖRæ6Æ–VçE’Ö7’ÆÃÔÖF‚æ‡—÷B†G‚ÆG’’ÆÓÓCs¶–b†ÃæÒ—¶G‚£ÖÒöÃ¶G’£ÖÒöÇÔ¢çƒÖG‚öÓ´¢ç“ÖG’öÓ¶¶æö"ç7G–ÆRçG&ç6f÷&ÓÒ'G&ç6ÆFR‚"¶G‚²'‚Â"¶G’²'‚’'Ò“°¦gVæ7F–öâVæD¦÷’‚—´¢æöãÖfÇ6S´¢çƒÔ¢ç“Ó¶¶æö"ç7G–ÆRçG&ç6f÷&ÓÒ'G&ç6ÆFRƒÃ’'Ö¦÷’æFDWfVçDÆ—7FVæW"‚'ö–çFW'W"ÆVæD¦÷’“¶¦÷’æFDWfVçDÆ—7FVæW"‚'ö–çFW&6æ6VÂ"ÆVæD¦÷’“°¤R‚&7B"’æFDWfVçDÆ—7FVæW"‚'ö–çFW&F÷vâ"ÆSÓç¶Rç&WfVçDFVfVÇB‚“¶–b†f—6†–ærç†6SÓÓÒ&f–v‡B"–f—6†–ærç&VVÃ×G'VWÒ“°¤R‚&7B"’æFDWfVçDÆ—7FVæW"‚'ö–çFW'W"ÆSÓç¶Rç&WfVçDFVfVÇB‚“¶–b†f—6†–ærç†6SÓÓÒ&f–v‡B"–f—6†–ærç&VVÃÖfÇ6S¶VÇ6R7F–öâ‚—Ò“°¤R‚&–çb"’æöæ6Æ–6³Ö–çfVçF÷'“´R‚&&GFÆT"’æFDWfVçDÆ—7FVæW"‚'ö–çFW'W"ÆSÓç¶Rç&WfVçDFVfVÇB‚“·&W6öÇfUF–Ö–ær‚—Ò“°¦gVæ7F–öâ&ö÷B†R—¶–b†R—¶Rç&WfVçDFVfVÇB‚“¶Rç7F÷&÷vF–öâ‚—Ö–b‡7F'FVB—&WGW&ã·7F'FVC×G'VS´R‚&&ö÷B"’ç7G–ÆRæF—7Æ“Ò&æöæR#·&W6—¦R‚“¶‡VB‚“¶Æ7C×W&f÷&Öæ6Rææ÷r‚“·&WVW7Dæ–ÖF–öäg&ÖR†Æö÷—Ð¤R‚&&Vv–â"’æFDWfVçDÆ—7FVæW"‚'ö–çFW'W"Æ&ö÷BÇ·76—fS¦fÇ6WÒ“´R‚&&Vv–â"’æFDWfVçDÆ—7FVæW"‚'F÷V6†VæB"Æ&ö÷BÇ·76—fS¦fÇ6WÒ“´R‚&&Vv–â"’æFDWfVçDÆ—7FVæW"‚&6Æ–6²"Æ&ö÷BÇ·76—fS¦fÇ6WÒ“°¦Fö7VÖVçBæFDWfVçDÆ—7FVæW"‚&6öçFW‡FÖVçR"ÆSÓæRç&WfVçDFVfVÇB‚’Ç·76—fS¦fÇ6WÒ“¶Fö7VÖVçBæFDWfVçDÆ—7FVæW"‚'6VÆV7G7F'B"ÆSÓæRç&WfVçDFVfVÇB‚’Ç·76—fS¦fÇ6WÒ“°§&W6—¦R‚“¶‡VB‚“°§Ò’‚“°£Â÷67&—Cà£Âö&öG“ãÂö‡FÖÃà
+<script src="core.js?v=7"></script>
+<script src="world-art.js?v=7"></script>
+<script src="world-render.js?v=7"></script>
+<script src="fishing-battle.js?v=7"></script>
+<script src="shop.js?v=7"></script>
+<script src="boot.js?v=7"></script>
+</body></html>
